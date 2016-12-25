@@ -1,0 +1,20 @@
+{
+  "manifest": {
+    "haxelib": {
+      "name": "hxwayli",
+      "url" : "https://github.com/bynuff/hxwayli",
+      "license": "MIT",
+      "tags": ["cross", "utility"],
+      "description": "",
+      "version": "0.0.0.1",
+      "classPath": "src",
+      "releasenote": "",
+      "contributors": ["bynuff"],
+      "dependencies": {}
+    },
+    "zip": {
+      "name": "${haxelib:name}_haxelib_${haxelib:version}",
+      "include": ["src", "LICENSE", "README.md", "run.n", "build.hxml"]
+    }
+  }
+}
