@@ -1,0 +1,12 @@
+{
+  "name": "hxwayli",
+  "url" : "https://github.com/bynuff/hxwayli",
+  "license": "MIT",
+  "tags": ["cross", "utility"],
+  "description": "",
+  "version": "0.0.0.1",
+  "classPath": "src",
+  "releasenote": "",
+  "contributors": ["bynuff"],
+  "dependencies": {}
+}
