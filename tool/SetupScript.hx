@@ -38,14 +38,13 @@ class SetupScript {
             return;
         }
 
-        var targetPath:String = '$haxePath$LIB_NAME.exe';
-        var currentPath:String = '$PROGRAM_PATH$LIB_NAME.exe';
+        var targetPath:String = Path.join(haxePath, '$LIB_NAME.exe');
+        var currentPath:String = Path.join(PROGRAM_PATH.dir, '$LIB_NAME.exe');
 
         File.copy(currentPath, targetPath);
 
         FileSystem.deleteFile(currentPath);
-        FileSystem.deleteFile('$PROGRAM_PATH$LIB_NAME');
-        FileSystem.deleteFile('$PROGRAM_PATH$LIB_NAME.n');
+        FileSystem.deleteFile('${PROGRAM_PATH.dir}$LIB_NAME.n');
     }
 
 }
