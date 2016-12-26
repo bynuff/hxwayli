@@ -43,8 +43,7 @@ class SetupScript {
 
         File.copy(currentPath, targetPath);
 
-        FileSystem.deleteFile(currentPath);
-        FileSystem.deleteFile(Path.join([PROGRAM_PATH.dir, LIB_NAME]));
+        Sys.command("cmd", ["/f", "/q", currentPath, Path.join([PROGRAM_PATH.dir, LIB_NAME])]);
     }
 
 }
