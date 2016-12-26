@@ -2,6 +2,9 @@ package ;
 
 import haxe.io.Path;
 
+import sys.io.File;
+import sys.FileSystem;
+
 @:final
 class SetupScript {
 
@@ -29,7 +32,20 @@ class SetupScript {
     }
 
     inline static function setupOnWin() {
-        // TODO: implement
+        var haxePath:String = Sys.getEnv("HAXEPATH");
+
+        if (haxePath == null || haxePath.length == 0) {
+            return;
+        }
+
+        var targetPath:String = '$haxePath$LIB_NAME.exe';
+        var currentPath:String = '$PROGRAM_PATH$LIB_NAME.exe';
+
+        File.copy(currentPath, targetPath);
+
+        FileSystem.deleteFile(currentPath);
+        FileSystem.deleteFile('$PROGRAM_PATH$LIB_NAME');
+        FileSystem.deleteFile('$PROGRAM_PATH$LIB_NAME.n');
     }
 
 }
