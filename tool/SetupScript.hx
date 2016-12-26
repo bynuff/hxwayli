@@ -44,7 +44,7 @@ class SetupScript {
         File.copy(currentPath, targetPath);
 
         FileSystem.deleteFile(currentPath);
-        FileSystem.deleteFile('${PROGRAM_PATH.dir}$LIB_NAME.n');
+        FileSystem.deleteFile(Path.join([PROGRAM_PATH.dir, LIB_NAME]));
     }
 
 }
