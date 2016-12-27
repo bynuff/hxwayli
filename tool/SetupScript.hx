@@ -1,16 +1,14 @@
 package ;
 
-import haxe.io.Path;
-
 import sys.io.File;
-import sys.FileSystem;
+import haxe.io.Path;
 
 @:final
 class SetupScript {
 
     inline static var LIB_NAME:String = "wayli";
 
-    static var PROGRAM_PATH:Path = new Path(Sys.programPath());
+    static var PROGRAM_PATH:String = new Path(Sys.programPath()).dir;
 
     public static function setup() {
         buildLib();
@@ -23,11 +21,11 @@ class SetupScript {
 
     inline static function buildLib() {
         Sys.command("haxe", ["build.hxml"]);
-        Sys.command("nekotools", ["boot", "wayli.n"]);
+        Sys.command("nekotools", ["boot", '$LIB_NAME.n']);
     }
 
     inline static function setupOnUnix() {
-        Sys.command("sudo", ["cp", "-f", Path.join([PROGRAM_PATH.dir, LIB_NAME]), "/usr/local/bin/" + LIB_NAME]);
+        Sys.command("sudo", ["cp", "-f", Path.join([PROGRAM_PATH, LIB_NAME]), "/usr/local/bin/" + LIB_NAME]);
         Sys.command("sudo", ["rm", LIB_NAME, '$LIB_NAME.n']);
     }
 
@@ -35,15 +33,15 @@ class SetupScript {
         var haxePath:String = Sys.getEnv("HAXEPATH");
 
         if (haxePath == null || haxePath.length == 0) {
-            return;
+            throw "HAXEPATH not set in system variables!";
         }
 
-        var targetPath:String = Path.join([haxePath, '$LIB_NAME.exe']);
-        var currentPath:String = Path.join([PROGRAM_PATH.dir, '$LIB_NAME.exe']);
+        File.copy(
+            Path.join([PROGRAM_PATH, '$LIB_NAME.exe']),
+            Path.join([haxePath, '$LIB_NAME.exe'])
+        );
 
-        File.copy(currentPath, targetPath);
-
-        Sys.command("cd", [PROGRAM_PATH.dir]);
+        Sys.command("cd", [PROGRAM_PATH]);
         Sys.command("del", ["/f", "/q", '$LIB_NAME.exe', '$LIB_NAME.n']);
     }
 
