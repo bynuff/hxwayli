@@ -3,12 +3,11 @@ package hxwayli.command;
 class CommandFactory {
 
     public static function getByName(commandType:CommandType, projectPath:String):ICommand {
-        switch(commandType) {
+        return switch(commandType) {
             case CommandType.Pack:
-                return new PackCommand(projectPath);
+                new PackCommand(projectPath);
             case _:
-                return new HelpCommand();
-
+                new HelpCommand();
         }
     }
 

@@ -12,11 +12,6 @@ class Main {
     public static function main() {
         var args:Array<String> = Sys.args();
 
-        if (args == null) {
-            // TODO throw exception
-            return;
-        }
-
         var commandName:CommandType = args.length > 0 ? args.shift() : "";
         var projectPath:String = args.length > 0 ? args.shift() : "";
 
