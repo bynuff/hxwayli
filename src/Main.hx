@@ -12,15 +12,15 @@ class Main {
     public static function main() {
         var args:Array<String> = Sys.args();
 
-        if (args == null || args.length != 2) {
+        if (args == null) {
             // TODO throw exception
             return;
         }
 
-        var commandName:CommandType = args.shift();
-        var projectPath:String = args.shift();
+        var commandName:CommandType = args.length > 0 ? args.shift() : "";
+        var projectPath:String = args.length > 0 ? args.shift() : "";
 
-        if (!FileSystem.exists(projectPath)) {
+        if (projectPath != "" && !FileSystem.exists(projectPath)) {
             // TODO throw exception
             return;
         }
