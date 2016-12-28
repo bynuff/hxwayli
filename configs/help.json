@@ -1,20 +1,17 @@
 {
-  "title": "Wayli haxe library tool 0.0.0.1 - (c)2016-2017 bynuff",
+  "title": " Wayli haxe library tool 0.0.0.1 - (c)2016-2017 bynuff",
   "body": [
     {
-      "header": "Usage:",
-      "text": [
-        "wayli [cmd] [options]",
-        "________________________________________________"
-      ]
+      "header": " Usage : wayli [cmd] [options]",
+      "text": []
     },
     {
-      "header": "Description:",
+      "header": " Description :",
       "text": [
-        "[COMMAND] [  OPTIONS   ]",
-        "________________________________________________",
-        " pack     [project path]    - create zip package from library path with '*.wli' file config",
-        " help                       - show tool information"
+        "  [COMMAND] [  OPTIONS   ]",
+        "   pack     [project path] : create zip package from path",
+        "                             with '*.wli' file config",
+        "   help : show tool information"
       ]
     }
   ]
