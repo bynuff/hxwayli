@@ -29,6 +29,7 @@ class Main {
 
         if (command != null) {
             command.execute();
+            Sys.println(command.toString());
         }
     }
 

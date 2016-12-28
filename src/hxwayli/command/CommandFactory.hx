@@ -7,8 +7,8 @@ class CommandFactory {
             case CommandType.Pack:
                 return new PackCommand(projectPath);
             case _:
-                // TODO show help
-                throw "Command doesn' exist.";
+                return new HelpCommand();
+
         }
     }
 

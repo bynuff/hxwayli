@@ -39,6 +39,10 @@ class PackCommand implements ICommand {
         return 0;
     }
 
+    public function toString():String {
+        return "";
+    }
+
     function loadManifest():Manifest {
         for (file in FileSystem.readDirectory(_projectPath)) {
             if (MANIFEST_PATTERN.match(file)) {
