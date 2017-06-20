@@ -1,21 +1,26 @@
 package hxwayli.command;
 
-import haxe.io.Path;
+import hxwayli.user.storage.UserStorage;
+import hxwayli.command.common.ICommand;
+
 class EnvCommand implements ICommand {
 
-	var _name:String;
+    var _name:String;
 
-	public function new(name:String) {
-		_name = name;
-	}
+    public function new(name:String) {
+        _name = name;
+    }
 
-	public function execute():Int {
-		Sys.command("haxelib", ["setup", Path.join([Sys.getEnv("HAXEPATH"), _name])]);
-		return 0;
-	}
+    public function execute():Int {
+        if (UserStorage.envExists(_name)) {
+            Sys.command("haxelib", ["setup", UserStorage.getEnvPath(_name), _name])]);
+            return 0;
+        }
+        return 1;
+    }
 
-	public function toString():String {
-		return "";
-	}
+    public function toString():String {
+        return "";
+    }
 
 }

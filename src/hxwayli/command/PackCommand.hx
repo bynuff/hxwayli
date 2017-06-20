@@ -1,5 +1,6 @@
 package hxwayli.command;
 
+import hxwayli.command.common.ICommand;
 import hxwayli.data.Manifest;
 import haxe.zip.Entry;
 import haxe.io.Path;

@@ -1,9 +1,11 @@
-package hxwayli.command;
+package hxwayli.command.common;
 
 class CommandFactory {
 
     public static function getByName(commandType:CommandType, args:Array<String>):ICommand {
-        return switch(commandType) {
+        return switch(commandType.toLowerCase()) {
+            case CommandType.Init:
+//            case CommandType.LsLi:
             case CommandType.Pack:
                 new PackCommand(args.shift());
             case CommandType.Env:

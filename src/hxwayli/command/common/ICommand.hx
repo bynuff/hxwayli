@@ -1,4 +1,4 @@
-package hxwayli.command;
+package hxwayli.command.common;
 
 interface ICommand {
     public function execute():Int;
