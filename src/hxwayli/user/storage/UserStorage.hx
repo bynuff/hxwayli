@@ -89,7 +89,7 @@ class UserStorage {
 
     public static function clearStorage() {
         if (isStorageExists) {
-            FileSystem.deleteDirectory(STORAGE_PATH);
+            FileSystem.deleteDirectory(Path.join([Sys.programPath(), "wayli"]));
         }
     }
 
