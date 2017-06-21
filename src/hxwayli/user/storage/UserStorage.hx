@@ -9,9 +9,10 @@ import haxe.io.Path;
 @:final
 class UserStorage {
 
+    static var DEFAULT_ENV:String = "lib";
     static var SETTINGS_FILE:String = "settings.json";
     static var STORAGE_PATH:String = Path.join([Sys.programPath(), "wayli", "local"]);
-    static var EMPTY_SETTINGS:Settings = {env: [], wayli: [], customCmds: []};
+    static var EMPTY_SETTINGS:Settings = {version: "0.0.1", currentEnv: DEFAULT_ENV, envList: [], devlibList: []};
 
     public static var settings(get, never):Settings;
     public static var isStorageExists(get, never):Bool;
@@ -19,9 +20,8 @@ class UserStorage {
     static var _settings:Settings;
 
     public static function createEnv(name:String) {
-        // TODO: check that is the envName couldn't be default (reserved env name)
-        if (!envExists(name)) {
-            settings.env.push(name);
+        if (name != DEFAULT_ENV && !envExists(name)) {
+            settings.envList.push(name);
             FileSystem.createDirectory(Path.join([STORAGE_PATH, name]));
 
             flush();
@@ -29,62 +29,67 @@ class UserStorage {
     }
 
     public static function removeEnv(name:String) {
-        // TODO: check is it active env
         if (envExists(name)) {
-            settings.env.remove(name);
+            if (settings.currentEnv == name) {
+                // TODO: print warning
+                return;
+            }
+            settings.envList.remove(name);
+
+            // check is it works
             FileSystem.deleteDirectory(Path.join([STORAGE_PATH, name]));
 
             flush();
         }
     }
 
-    public static function getAllEnv():Array<String> {
-        return settings.env.copy();
-    }
-
     public static function envExists(name:String):Bool {
-        return settings.env.indexOf(name) >= 0;
+        return settings.envList.indexOf(name) >= 0;
     }
 
     public static function getEnvPath(name:String):String {
+
+        if (name == DEFAULT_ENV) {
+            // TODO: refactor me
+            if (~/windows/i.match(Sys.systemName())) {
+                return Path.join([Sys.getEnv("HAXEPATH"), DEFAULT_ENV]);
+            } else {
+                return Path.join([Sys.programPath(), DEFAULT_ENV]);
+            }
+        }
+
         return Path.join([STORAGE_PATH, name]);
     }
 
-    public static function createWayli(name:String, path:String) {
-        if (getWayliByName(name) != null) {
-            // TODO: throw exception, project already registered
+    public static function registerDevlib(name:String, path:String) {
+        if (devlibExists(name)) {
             return;
         }
-        settings.wayli.push({name: name, path: path});
+        settings.devlibList.push({name: name, path: path});
 
         flush();
     }
 
-    public static function removeWayli(name:String) {
-        var wayli = getWayliByName(name);
-
-        if (wayli != null) {
-            settings.wayli.remove(wayli);
-
-            flush();
+    public static function removeDevlib(name:String) {
+        if (!devlibExists(name, function(dl:Devlib) {
+            settings.devlibList.remove(dl);
+        })) {
+            return;
         }
+
+        flush();
     }
 
-    public static function getAllWayli():Array<Wayli> {
-        var outcome = [];
-        for (w in settings.wayli) {
-            outcome.push({name: w.name, path: w.path});
-        }
-        return outcome;
-    }
-
-    public static function getWayliByName(name:String):Wayli {
-        for (w in settings.wayli) {
-            if (w.name == name) {
-                return w;
+    public static function devlibExists(name:String, ?out:Devlib->Void):Bool {
+        for (dl in settings.devlibList) {
+            if (dl.name == name) {
+                if (out != null) {
+                    out(dl);
+                }
+                return true;
             }
         }
-        return null;
+        return false;
     }
 
     static function initStorage() {
@@ -97,8 +102,6 @@ class UserStorage {
         var output = File.write(Path.join([STORAGE_PATH, SETTINGS_FILE]));
         output.writeString(Json.stringify(_settings == null ? EMPTY_SETTINGS : _settings));
         output.close();
-
-        Sys.println('Flush ${Path.join([STORAGE_PATH, SETTINGS_FILE])} ...');
     }
 
     static function get_settings():Settings {

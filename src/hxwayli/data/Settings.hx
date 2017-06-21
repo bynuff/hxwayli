@@ -1,12 +1,13 @@
 package hxwayli.data;
 
 typedef Settings = {
-    var env:Array<String>;
-    var wayli:Array<Wayli>;
-    var customCmds:Array<String>;
+    var version:String;
+    var currentEnv:String;
+    var envList:Array<String>;
+    var devlibList:Array<Devlib>;
 }
 
-typedef Wayli = {
+typedef Devlib = {
     var name:String;
     var path:String;
 }
