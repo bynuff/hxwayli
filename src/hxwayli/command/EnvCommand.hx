@@ -13,7 +13,7 @@ class EnvCommand implements ICommand {
 
     public function execute():Int {
         if (UserStorage.envExists(_name)) {
-            Sys.command("haxelib", ["setup", UserStorage.getEnvPath(_name), _name])]);
+            Sys.command("haxelib", ["setup", UserStorage.getEnvPath(_name)]);
             return 0;
         }
         return 1;
