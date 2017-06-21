@@ -39,11 +39,11 @@ class UserStorage {
     }
 
     public static function getAllEnv():Array<String> {
-        return _settings.env.copy();
+        return settings.env.copy();
     }
 
     public static function envExists(name:String):Bool {
-        return _settings.env.indexOf(name) >= 0;
+        return settings.env.indexOf(name) >= 0;
     }
 
     public static function getEnvPath(name:String):String {
@@ -72,14 +72,14 @@ class UserStorage {
 
     public static function getAllWayli():Array<Wayli> {
         var outcome = [];
-        for (w in _settings.wayli) {
+        for (w in settings.wayli) {
             outcome.push({name: w.name, path: w.path});
         }
         return outcome;
     }
 
     public static function getWayliByName(name:String):Wayli {
-        for (w in _settings.wayli) {
+        for (w in settings.wayli) {
             if (w.name == name) {
                 return w;
             }
@@ -97,6 +97,8 @@ class UserStorage {
         var output = File.write(Path.join([STORAGE_PATH, SETTINGS_FILE]));
         output.writeString(Json.stringify(_settings == null ? EMPTY_SETTINGS : _settings));
         output.close();
+
+        Sys.println('Flush ${Path.join([STORAGE_PATH, SETTINGS_FILE])} ...');
     }
 
     static function get_settings():Settings {
