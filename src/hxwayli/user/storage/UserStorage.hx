@@ -9,10 +9,9 @@ import haxe.io.Path;
 @:final
 class UserStorage {
 
-    inline static var SETTINGS_FILE:String = "settings.json";
-    inline static var STORAGE_PATH:String = Path.join([Sys.programPath(), "local"]);
-
-    inline static var EMPTY_SETTINGS:Settings = {env: [], wayli: [], customCmds: []};
+    static var SETTINGS_FILE:String = "settings.json";
+    static var STORAGE_PATH:String = Path.join([Sys.programPath(), "local"]);
+    static var EMPTY_SETTINGS:Settings = {env: [], wayli: [], customCmds: []};
 
     public static var settings(get, never):Settings;
     public static var isStorageExists(get, never):Bool;
@@ -95,10 +94,9 @@ class UserStorage {
     }
 
     static function flush() {
-        File.write(
-            Path.join([STORAGE_PATH, SETTINGS_FILE]),
-            Json.stringify(_settings == null ? EMPTY_SETTINGS : _settings)
-        );
+        var output = File.write(Path.join([STORAGE_PATH, SETTINGS_FILE]));
+        output.writeString(Json.stringify(_settings == null ? EMPTY_SETTINGS : _settings));
+        output.close();
     }
 
     static function get_settings():Settings {
