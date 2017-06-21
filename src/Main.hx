@@ -2,10 +2,10 @@ package ;
 
 import sys.FileSystem;
 
-import hxwayli.command.ICommand;
-import hxwayli.command.CommandType;
+import hxwayli.command.common.ICommand;
+import hxwayli.command.common.CommandType;
 
-using hxwayli.command.CommandFactory;
+using hxwayli.command.common.CommandFactory;
 
 class Main {
 
