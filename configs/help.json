@@ -1,8 +1,14 @@
 {
-  "title": " Wayli (0.0.0.4 ver.) - developer haxe libs tool. (c)2016-2017 bynuff",
+  "title": " Haxe Develop Library Tool 0.0.1 - (c)2016-2017 bynuff",
   "body": [
     {
-      "header": "  Description :",
+      "header": "  Usage: wayli [command] [options]",
+      "text": []
+    }
+  ],
+  "body": [
+    {
+      "header": "  Command description",
       "text": [
         "   pack <lib_name>  : pack registered lib in zip",
         "   mkenv <env_name> : create new enviroment",
