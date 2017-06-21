@@ -55,7 +55,7 @@ class UserStorage {
                 return Path.join([Sys.getEnv("HAXEPATH"), DEFAULT_ENV]);
             } else {
                 // TODO: refactor me
-                return Path.join(["usr/local/lib/haxe", DEFAULT_ENV]);
+                return Path.join(["/usr/local/lib/haxe", DEFAULT_ENV]);
             }
         }
 
