@@ -2,12 +2,12 @@
   "title": " Wayli haxe library tool 0.0.0.1 - (c)2016-2017 bynuff",
   "body": [
     {
-      "header": "\tDescription :",
+      "header": "   Description :",
       "text": [
-        "\t  pack <lib_name>  : pack registered lib in zip",
-        "\t  mkenv <env_name> : create new enviroment",
-        "\t  env <env_name>   : set active enviroment from existing",
-        "\t  help             : show tool information"
+        "     pack <lib_name>  : pack registered lib in zip",
+        "     mkenv <env_name> : create new enviroment",
+        "     env <env_name>   : set active enviroment from existing",
+        "     help             : show tool information"
       ]
     }
   ]
