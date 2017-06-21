@@ -7,6 +7,7 @@
         "     pack <lib_name>  : pack registered lib in zip",
         "     mkenv <env_name> : create new enviroment",
         "     env <env_name>   : set active enviroment from existing",
+        "     uninst           : remove wayli tool",
         "     help             : show tool information"
       ]
     }

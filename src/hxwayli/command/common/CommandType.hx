@@ -2,6 +2,8 @@ package hxwayli.command.common;
 
 @:enum
 abstract CommandType(String) from String to String {
+    var Uninst:String = "uninst"; // wayli uninst
+
     var Init:String = "init"; // wayli init <project_name> <project_path>
     var LsLi:String = "lsli"; // wayli lsli
 

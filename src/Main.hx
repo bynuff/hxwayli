@@ -5,7 +5,7 @@ import sys.FileSystem;
 import hxwayli.command.common.ICommand;
 import hxwayli.command.common.CommandType;
 
-using hxwayli.command.common.CommandFactory;
+using hxwayli.command.common.CommandProvider;
 
 class Main {
 
@@ -20,7 +20,7 @@ class Main {
 //            return;
 //        }
 
-        var command:ICommand = commandName.getByName(args);
+        var command:ICommand = commandName.resolveByName(args);
 
         if (command != null) {
             command.execute();

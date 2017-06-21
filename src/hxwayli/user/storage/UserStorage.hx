@@ -87,6 +87,12 @@ class UserStorage {
         return null;
     }
 
+    public static function clearStorage() {
+        if (isStorageExists) {
+            FileSystem.deleteDirectory(STORAGE_PATH);
+        }
+    }
+
     static function initStorage() {
         FileSystem.createDirectory(STORAGE_PATH);
 
