@@ -87,12 +87,6 @@ class UserStorage {
         return null;
     }
 
-    public static function clearStorage() {
-        if (isStorageExists) {
-            Sys.command("sudo", ["rm", Path.join([Sys.programPath(), "wayli"])]);
-        }
-    }
-
     static function initStorage() {
         FileSystem.createDirectory(STORAGE_PATH);
 
