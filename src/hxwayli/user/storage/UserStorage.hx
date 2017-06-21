@@ -29,7 +29,7 @@ class UserStorage {
     }
 
     public static function removeEnv(name:String) {
-        if (envExists(name)) {
+        if (name != DEFAULT_ENV && envExists(name)) {
             if (settings.currentEnv == name) {
                 // TODO: print warning
                 return;
@@ -37,14 +37,14 @@ class UserStorage {
             settings.envList.remove(name);
 
             // check is it works
-            FileSystem.deleteDirectory(Path.join([STORAGE_PATH, name]));
+            FileSystem.deleteDirectory(getEnvPath(name));
 
             flush();
         }
     }
 
     public static function envExists(name:String):Bool {
-        return settings.envList.indexOf(name) >= 0;
+        return settings.envList.indexOf(name) >= 0 || name == DEFAULT_ENV;
     }
 
     public static function getEnvPath(name:String):String {

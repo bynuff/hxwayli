@@ -12,7 +12,10 @@ class EnvCommand implements ICommand {
     }
 
     public function execute():Int {
-        if (UserStorage.envExists(_name)) {
+        // TODO: refactor me
+        if (UserStorage.settings.currentEnv != _name && UserStorage.envExists(_name)) {
+            UserStorage.settings.currentEnv = _name;
+            @:privateAccess UserStorage.flush();
             Sys.command("haxelib", ["setup", UserStorage.getEnvPath(_name)]);
             return 0;
         }
