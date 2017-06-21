@@ -89,7 +89,7 @@ class UserStorage {
 
     public static function clearStorage() {
         if (isStorageExists) {
-            FileSystem.deleteDirectory(Path.join([Sys.programPath(), "wayli"]));
+            Sys.command("sudo", ["rm", Path.join([Sys.programPath(), "wayli"])]);
         }
     }
 
