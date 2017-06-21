@@ -54,7 +54,8 @@ class UserStorage {
             if (~/windows/i.match(Sys.systemName())) {
                 return Path.join([Sys.getEnv("HAXEPATH"), DEFAULT_ENV]);
             } else {
-                return Path.join([Sys.programPath(), DEFAULT_ENV]);
+                // TODO: refactor me
+                return Path.join(["usr/local/lib/haxe", DEFAULT_ENV]);
             }
         }
 
