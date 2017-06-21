@@ -10,7 +10,7 @@ import haxe.io.Path;
 class UserStorage {
 
     static var SETTINGS_FILE:String = "settings.json";
-    static var STORAGE_PATH:String = Path.join([Sys.programPath(), "local"]);
+    static var STORAGE_PATH:String = Path.join([Sys.programPath(), "wayli", "local"]);
     static var EMPTY_SETTINGS:Settings = {env: [], wayli: [], customCmds: []};
 
     public static var settings(get, never):Settings;
@@ -21,7 +21,7 @@ class UserStorage {
     public static function createEnv(name:String) {
         // TODO: check that is the envName couldn't be default (reserved env name)
         if (!envExists(name)) {
-            _settings.env.push(name);
+            settings.env.push(name);
             FileSystem.createDirectory(Path.join([STORAGE_PATH, name]));
 
             flush();
@@ -31,7 +31,7 @@ class UserStorage {
     public static function removeEnv(name:String) {
         // TODO: check is it active env
         if (envExists(name)) {
-            _settings.env.remove(name);
+            settings.env.remove(name);
             FileSystem.deleteDirectory(Path.join([STORAGE_PATH, name]));
 
             flush();
@@ -55,7 +55,7 @@ class UserStorage {
             // TODO: throw exception, project already registered
             return;
         }
-        _settings.wayli.push({name: name, path: path});
+        settings.wayli.push({name: name, path: path});
 
         flush();
     }
@@ -64,7 +64,7 @@ class UserStorage {
         var wayli = getWayliByName(name);
 
         if (wayli != null) {
-            _settings.wayli.remove(wayli);
+            settings.wayli.remove(wayli);
 
             flush();
         }
