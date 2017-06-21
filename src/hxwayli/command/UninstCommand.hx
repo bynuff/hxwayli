@@ -1,16 +1,19 @@
 package hxwayli.command;
 
 import haxe.io.Path;
-import hxwayli.command.common.ICommand;
 
-class UninstCommand implements ICommand {
+class UninstCommand extends EnvCommand {
 
-    public function new() {}
+    public function new() {
+        // TODO: refactor me
+        super("lib");
+    }
 
-    public function execute():Int {
+    override public function execute():Int {
+
+        super.execute();
 
         // TODO: remove lib hxwayli from haxelib
-        // TODO: set haxelib repository to default path
         // TODO: refactor me
         if (~/windows/i.match(Sys.systemName())) {
             Sys.command("del", ["/f", "/q", Path.join([Sys.programPath(), "wayli"])]);
@@ -23,7 +26,7 @@ class UninstCommand implements ICommand {
         return 0;
     }
 
-    public function toString():String {
+    override public function toString():String {
         return "";
     }
 
