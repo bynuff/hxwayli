@@ -1,6 +1,5 @@
 package hxwayli.command;
 
-import sys.FileSystem;
 import haxe.io.Path;
 
 class UninstCommand extends EnvCommand {
@@ -17,11 +16,8 @@ class UninstCommand extends EnvCommand {
         // TODO: remove lib hxwayli from haxelib
         // TODO: refactor me
         if (~/windows/i.match(Sys.systemName())) {
-//            Sys.command("cd", ["/"]);
-//            Sys.command("del", ["/f", "/q", Path.join([Sys.getEnv("HAXEPATH"), "wayli"])]);
-//            Sys.command("del", ["/f", "/q", Path.join([Sys.getEnv("HAXEPATH"), "wayli.exe"])]);
-            FileSystem.deleteDirectory(Path.join([Sys.getEnv("HAXEPATH"), "wayli"]));
-            FileSystem.deleteFile(Path.join([Sys.getEnv("HAXEPATH"), "wayli.exe"]));
+            Sys.command("rmdir", ["/s", "/f", "/q", Path.join([Sys.getEnv("HAXEPATH"), "wayli"])]);
+            Sys.command("del", ["/s", "/f", "/q", Path.join([Sys.getEnv("HAXEPATH"), "wayli.exe"])]);
         } else {
             Sys.command("sudo", ["rm", "-rf", Path.join(["/usr/local/lib/haxe", "wayli"])]);
             Sys.command("sudo", ["rm", "-rf", "/usr/local/bin/wayli"]);
