@@ -16,9 +16,8 @@ class UninstCommand extends EnvCommand {
         // TODO: remove lib hxwayli from haxelib
         // TODO: refactor me
         if (~/windows/i.match(Sys.systemName())) {
-            Sys.command("cd", [new Path(Sys.getEnv("HAXEPATH")).dir]);
-            Sys.command("rmdir", ["/s", "/q", "wayli"]);
-//            Sys.command("del", ["/s", "/f", "/q", "wayli.exe"]);
+            Sys.command("rmdir", ["/s", "/q", Path.join([Sys.getEnv("HAXEPATH"), "wayli"])]);
+//            Sys.command("del", ["/s", "/f", "/q", Path.join([Sys.getEnv("HAXEPATH"), "wayli.exe"])]);
         } else {
             Sys.command("sudo", ["rm", "-rf", Path.join(["/usr/local/lib/haxe", "wayli"])]);
             Sys.command("sudo", ["rm", "-rf", "/usr/local/bin/wayli"]);
