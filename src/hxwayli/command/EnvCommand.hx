@@ -17,9 +17,8 @@ class EnvCommand implements ICommand {
             UserStorage.settings.currentEnv = _name;
             @:privateAccess UserStorage.flush();
             Sys.command("haxelib", ["setup", UserStorage.getEnvPath(_name)]);
-            return 0;
         }
-        return 1;
+        return 0;
     }
 
     public function toString():String {
