@@ -17,7 +17,7 @@ class UninstCommand extends EnvCommand {
         // TODO: refactor me
         if (~/windows/i.match(Sys.systemName())) {
             Sys.println('Remove from ${Path.join([Sys.getEnv("HAXEPATH"), "wayli"])}');
-            Sys.command("rmdir", ["/s", "/q", Path.join([Sys.getEnv("HAXEPATH"), "wayli"])]);
+            Sys.command("rmdir", ["/s", "/q", Path.normalize(Path.join([Sys.getEnv("HAXEPATH"), "wayli"]))]);
 //            Sys.command("del", ["/s", "/f", "/q", Path.join([Sys.getEnv("HAXEPATH"), "wayli.exe"])]);
         } else {
             Sys.command("sudo", ["rm", "-rf", Path.join(["/usr/local/lib/haxe", "wayli"])]);
