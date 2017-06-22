@@ -11,7 +11,9 @@ class UserStorage {
 
     static var DEFAULT_ENV:String = "lib";
     static var SETTINGS_FILE:String = "settings.json";
-    static var STORAGE_PATH:String = Path.join([Sys.programPath(), "wayli", "local"]);
+    static var STORAGE_PATH:String = {
+        ~/windows/i.match(Sys.systemName()) ? Path.join([Sys.getEnv("HAXEPATH"), "wayli", "local"]) : Path.join(["/usr/local/lib/haxe", "wayli", "local"]);
+    };
     static var EMPTY_SETTINGS:Settings = {version: "0.0.1", currentEnv: DEFAULT_ENV, envList: [], devlibList: []};
 
     public static var settings(get, never):Settings;

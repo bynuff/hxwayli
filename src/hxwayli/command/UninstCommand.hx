@@ -17,10 +17,10 @@ class UninstCommand extends EnvCommand {
         // TODO: refactor me
         if (~/windows/i.match(Sys.systemName())) {
             Sys.command("cd", ["/"]);
-            Sys.command("del", ["/f", "/q", Path.join([Sys.programPath(), "wayli"])]);
+            Sys.command("del", ["/f", "/q", Path.join([Sys.getEnv("HAXEPATH"), "wayli"])]);
             Sys.command("del", ["/f", "/q", Path.join([Sys.getEnv("HAXEPATH"), "wayli.exe"])]);
         } else {
-            Sys.command("sudo", ["rm", "-rf", Path.join([Sys.programPath(), "wayli"])]);
+            Sys.command("sudo", ["rm", "-rf", Path.join(["/usr/local/lib/haxe", "wayli"])]);
             Sys.command("sudo", ["rm", "-rf", "/usr/local/bin/wayli"]);
         }
 
