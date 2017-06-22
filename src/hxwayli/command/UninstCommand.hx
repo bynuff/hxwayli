@@ -18,7 +18,7 @@ class UninstCommand extends EnvCommand {
         if (~/windows/i.match(Sys.systemName())) {
             Sys.command("cd", [new Path(Sys.getEnv("HAXEPATH")).dir]);
             Sys.command("rmdir", ["/s", "/q", "wayli"]);
-            Sys.command("del", ["/s", "/f", "/q", "wayli.exe"]);
+//            Sys.command("del", ["/s", "/f", "/q", "wayli.exe"]);
         } else {
             Sys.command("sudo", ["rm", "-rf", Path.join(["/usr/local/lib/haxe", "wayli"])]);
             Sys.command("sudo", ["rm", "-rf", "/usr/local/bin/wayli"]);
