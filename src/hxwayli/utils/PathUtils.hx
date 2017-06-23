@@ -60,8 +60,10 @@ private class UnixPathes implements IPathes {
     public function new() {
         separateChar = "/";
         haxePath = "/usr/local/lib/haxe";
-        storagePath = "~/wayli";
+        storagePath = "wayli/local";
         wayliProgramPath = "/usr/local/bin/wayli";
+
+        setUserRootPath();
     }
 
     public function normalize(path:String):String {
@@ -84,6 +86,10 @@ private class UnixPathes implements IPathes {
         return normalize(pathes.join(separateChar));
     }
 
+    function setUserRootPath() {
+        Sys.command("cd", ["~"]);
+    }
+
 }
 
 @:final
@@ -97,7 +103,7 @@ private class WinPathes implements IPathes {
     public function new() {
         separateChar = "\\";
         haxePath = normalize(Sys.getEnv("HAXEPATH"));
-        storagePath = join([haxePath, "wayli"]);
+        storagePath = join([haxePath, "wayli/local"]);
         wayliProgramPath = join([haxePath, "wayli.exe"]);
     }
 
