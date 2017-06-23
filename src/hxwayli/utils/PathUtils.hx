@@ -40,7 +40,7 @@ class PathUtils {
     }
 
     static function get_STORAGE_PATH():String {
-        return systemPathes.storagePath;
+        return joinPathes([HAXE_PATH, "wayli/local"]);
     }
 
     static function get_WAYLI_PROGRAM_PATH():String {
@@ -53,17 +53,13 @@ class PathUtils {
 private class UnixPathes implements IPathes {
 
     public var haxePath:String;
-    public var storagePath:String;
     public var separateChar:String;
     public var wayliProgramPath:String;
 
     public function new() {
         separateChar = "/";
         haxePath = "/usr/local/lib/haxe";
-        storagePath = "wayli/local";
         wayliProgramPath = "/usr/local/bin/wayli";
-
-        setUserRootPath();
     }
 
     public function normalize(path:String):String {
@@ -86,24 +82,18 @@ private class UnixPathes implements IPathes {
         return normalize(pathes.join(separateChar));
     }
 
-    function setUserRootPath() {
-        Sys.command("cd", ["~"]);
-    }
-
 }
 
 @:final
 private class WinPathes implements IPathes {
 
     public var haxePath:String;
-    public var storagePath:String;
     public var separateChar:String;
     public var wayliProgramPath:String;
 
     public function new() {
         separateChar = "\\";
         haxePath = normalize(Sys.getEnv("HAXEPATH"));
-        storagePath = join([haxePath, "wayli/local"]);
         wayliProgramPath = join([haxePath, "wayli.exe"]);
     }
 
@@ -132,7 +122,6 @@ private class WinPathes implements IPathes {
 private interface IPathes {
 
     var haxePath:String;
-    var storagePath:String;
     var separateChar:String;
     var wayliProgramPath:String;
 
