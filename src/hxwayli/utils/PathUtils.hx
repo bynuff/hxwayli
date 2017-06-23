@@ -5,7 +5,6 @@ using StringTools;
 @:final
 class PathUtils {
 
-    inline public static var WAYLI_PATH:String = "wayli";
     inline public static var DEFAULT_ENV_PATH:String = "lib";
     inline public static var SETTINGS_FILE_PATH:String = "settings.json";
 
@@ -28,7 +27,7 @@ class PathUtils {
     }
 
     public static function deleteFile(path:String) {
-        systemPathes.deleteFile(path)
+        systemPathes.deleteFile(path);
     }
 
     macro static function getSystemPathes() {
@@ -61,7 +60,7 @@ private class UnixPathes implements IPathes {
     public function new() {
         separateChar = "/";
         haxePath = "/usr/local/lib/haxe";
-        storagePath = '~/${PathUtils.WAYLI_PATH}';
+        storagePath = "~/wayli";
         wayliProgramPath = "/usr/local/bin/wayli";
     }
 
@@ -98,8 +97,8 @@ private class WinPathes implements IPathes {
     public function new() {
         separateChar = "\\";
         haxePath = normalize(Sys.getEnv("HAXEPATH"));
-        storagePath = join([haxePath, PathUtils.WAYLI_PATH]);
-        wayliProgramPath = join([haxePath, '${PathUtils.WAYLI_PATH}.exe']);
+        storagePath = join([haxePath, "wayli"]);
+        wayliProgramPath = join([haxePath, "wayli.exe"]);
     }
 
     public function normalize(path:String):String {
