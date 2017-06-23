@@ -91,7 +91,12 @@ class UserStorage {
     }
 
     static function initStorage() {
-        FileSystem.createDirectory(STORAGE_PATH);
+        // TODO: refactor me
+        if (~/windows/i.match(Sys.systemName())) {
+            Sys.command("mkdir", [STORAGE_PATH]);
+        } else {
+            Sys.command("mkdir", ["-m", "777", STORAGE_PATH]);
+        }
 
         flush();
     }
