@@ -4,6 +4,7 @@ import hxwayli.user.storage.UserStorage;
 import hxwayli.command.common.ICommand;
 
 using StringTools;
+using hxwayli.utils.PathUtils;
 
 class ClEnvCommand implements ICommand {
 
@@ -19,11 +20,7 @@ class ClEnvCommand implements ICommand {
             Sys.command("wayli", ["env", "lib"]);
         }
         if (UserStorage.removeEnv(_name)) {
-            if (~/windows/i.match(Sys.systemName())) {
-                Sys.command("del", ["/f", "/q", UserStorage.getEnvPath(_name).replace("/", "\\")]);
-            } else {
-                Sys.command("sudo", ["rm", "-rf", UserStorage.getEnvPath(_name)]);
-            }
+            UserStorage.getEnvPath(_name).deleteDirectory();
         }
 
         return 0;

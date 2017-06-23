@@ -1,18 +1,17 @@
 package hxwayli.user.storage;
 
+import hxwayli.utils.PathUtils;
 import haxe.Json;
 import hxwayli.data.Settings;
 import sys.io.File;
 import sys.FileSystem;
-import haxe.io.Path;
+
+using hxwayli.utils.PathUtils;
 
 @:final
 class UserStorage {
 
-    static var DEFAULT_ENV:String = "lib";
-    static var SETTINGS_FILE:String = "settings.json";
-    static var STORAGE_PATH:String = ~/windows/i.match(Sys.systemName()) ? Path.join([Sys.getEnv("HAXEPATH"), "wayli", "local"]) : "wayli/loaca";
-    static var EMPTY_SETTINGS:Settings = {version: "0.0.1", currentEnv: DEFAULT_ENV, envList: [], devlibList: []};
+    static var EMPTY_SETTINGS:Settings = {version: "0.0.1", currentEnv: PathUtils.DEFAULT_ENV_PATH, envList: [], devlibList: []};
 
     public static var settings(get, never):Settings;
     public static var isStorageExists(get, never):Bool;
@@ -20,16 +19,16 @@ class UserStorage {
     static var _settings:Settings;
 
     public static function createEnv(name:String) {
-        if (name != DEFAULT_ENV && !envExists(name)) {
+        if (name != PathUtils.DEFAULT_ENV_PATH && !envExists(name)) {
             settings.envList.push(name);
-            FileSystem.createDirectory(Path.join([STORAGE_PATH, name]));
+            [PathUtils.STORAGE_PATH, name].joinPathes().createDirectory();
 
             flush();
         }
     }
 
     public static function removeEnv(name:String):Bool {
-        if (name != DEFAULT_ENV && envExists(name)) {
+        if (name != PathUtils.DEFAULT_ENV_PATH && envExists(name)) {
             settings.envList.remove(name);
 
             flush();
@@ -41,22 +40,11 @@ class UserStorage {
     }
 
     public static function envExists(name:String):Bool {
-        return settings.envList.indexOf(name) >= 0 || name == DEFAULT_ENV;
+        return settings.envList.indexOf(name) >= 0 || name == PathUtils.DEFAULT_ENV_PATH;
     }
 
     public static function getEnvPath(name:String):String {
-
-        if (name == DEFAULT_ENV) {
-            // TODO: refactor me
-            if (~/windows/i.match(Sys.systemName())) {
-                return Path.join([Sys.getEnv("HAXEPATH"), DEFAULT_ENV]);
-            } else {
-                // TODO: refactor me
-                return Path.join(["/usr/local/lib/haxe", DEFAULT_ENV]);
-            }
-        }
-
-        return Path.join([STORAGE_PATH, name]);
+        return [name == PathUtils.DEFAULT_ENV_PATH ? PathUtils.HAXE_PATH : PathUtils.STORAGE_PATH, name].joinPathes();
     }
 
     public static function registerDevlib(name:String, path:String) {
@@ -91,18 +79,13 @@ class UserStorage {
     }
 
     static function initStorage() {
-        // TODO: refactor me
-        if (~/windows/i.match(Sys.systemName())) {
-            Sys.command("mkdir", [STORAGE_PATH]);
-        } else {
-            Sys.command("mkdir", ["-m", "777", STORAGE_PATH]);
-        }
+        PathUtils.STORAGE_PATH.createDirectory();
 
         flush();
     }
 
     static function flush() {
-        var output = File.write(Path.join([STORAGE_PATH, SETTINGS_FILE]));
+        var output = File.write([PathUtils.STORAGE_PATH, PathUtils.SETTINGS_FILE_PATH].joinPathes());
         output.writeString(Json.stringify(_settings == null ? EMPTY_SETTINGS : _settings));
         output.close();
     }
@@ -112,14 +95,14 @@ class UserStorage {
             initStorage();
         }
         if (_settings == null) {
-            var bytes = File.getBytes(Path.join([STORAGE_PATH, SETTINGS_FILE]));
+            var bytes = File.getBytes([PathUtils.STORAGE_PATH, PathUtils.SETTINGS_FILE_PATH].joinPathes());
             _settings = Json.parse(bytes.toString());
         }
         return _settings;
     }
 
     static function get_isStorageExists():Bool {
-        return FileSystem.exists(STORAGE_PATH);
+        return FileSystem.exists(PathUtils.STORAGE_PATH);
     }
 
 }
