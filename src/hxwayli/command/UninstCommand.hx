@@ -21,7 +21,7 @@ class UninstCommand extends EnvCommand {
             Sys.command("rmdir", ["/s", "/q", Path.join([Sys.getEnv("HAXEPATH"), "wayli"]).replace("/", "\\")]);
 //            Sys.command("del", ["/s", "/f", "/q", Path.join([Sys.getEnv("HAXEPATH"), "wayli.exe"])]);
         } else {
-            Sys.command("sudo", ["rm", "-rf", Path.join(["/usr/local/lib/haxe", "wayli"])]);
+            Sys.command("sudo", ["rm", "-rf", "~/wayli"]);
             Sys.command("sudo", ["rm", "-rf", "/usr/local/bin/wayli"]);
         }
 

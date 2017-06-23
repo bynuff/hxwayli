@@ -11,7 +11,7 @@ class UserStorage {
 
     static var DEFAULT_ENV:String = "lib";
     static var SETTINGS_FILE:String = "settings.json";
-    static var STORAGE_PATH:String = ~/windows/i.match(Sys.systemName()) ? Path.join([Sys.getEnv("HAXEPATH"), "wayli", "local"]) : Path.join(["/usr/local/lib/haxe", "wayli", "local"]);
+    static var STORAGE_PATH:String = ~/windows/i.match(Sys.systemName()) ? Path.join([Sys.getEnv("HAXEPATH"), "wayli", "local"]) : "~/wayli/local";
     static var EMPTY_SETTINGS:Settings = {version: "0.0.1", currentEnv: DEFAULT_ENV, envList: [], devlibList: []};
 
     public static var settings(get, never):Settings;
@@ -91,12 +91,7 @@ class UserStorage {
     }
 
     static function initStorage() {
-        // TODO: refactor me
-        if (~/windows/i.match(Sys.systemName())) {
-            Sys.command("mkdir", [STORAGE_PATH]);
-        } else {
-            Sys.command("mkdir", ["-m", "777", STORAGE_PATH]);
-        }
+        FileSystem.createDirectory(STORAGE_PATH);
 
         flush();
     }
