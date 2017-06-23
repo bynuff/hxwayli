@@ -11,9 +11,7 @@ class UserStorage {
 
     static var DEFAULT_ENV:String = "lib";
     static var SETTINGS_FILE:String = "settings.json";
-    static var STORAGE_PATH:String = {
-        ~/windows/i.match(Sys.systemName()) ? Path.join([Sys.getEnv("HAXEPATH"), "wayli", "local"]) : Path.join(["/usr/local/lib/haxe", "wayli", "local"]);
-    };
+    static var STORAGE_PATH:String = ~/windows/i.match(Sys.systemName()) ? Path.join([Sys.getEnv("HAXEPATH"), "wayli", "local"]) : Path.join(["/usr/local/lib/haxe", "wayli", "local"]);
     static var EMPTY_SETTINGS:Settings = {version: "0.0.1", currentEnv: DEFAULT_ENV, envList: [], devlibList: []};
 
     public static var settings(get, never):Settings;
@@ -30,19 +28,16 @@ class UserStorage {
         }
     }
 
-    public static function removeEnv(name:String) {
+    public static function removeEnv(name:String):Bool {
         if (name != DEFAULT_ENV && envExists(name)) {
-            if (settings.currentEnv == name) {
-                // TODO: print warning
-                return;
-            }
             settings.envList.remove(name);
 
-            // check is it works
-            FileSystem.deleteDirectory(getEnvPath(name));
-
             flush();
+
+            return true;
         }
+
+        return false;
     }
 
     public static function envExists(name:String):Bool {

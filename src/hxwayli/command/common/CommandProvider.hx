@@ -9,10 +9,12 @@ class CommandProvider {
                 new PackCommand(args.shift());
             case CommandType.Env:
                 new EnvCommand(args.shift());
-//            case CommandType.LsEnv:
+            case CommandType.LsEnv:
+                new LsEnvCommand();
             case CommandType.MkEnv:
                 new MkEnvCommand(args.shift());
-//            case CommandType.ClEnv:
+            case CommandType.ClEnv:
+                new ClEnvCommand(args.shift());
             case CommandType.Uninst:
                 new UninstCommand();
             case _:
