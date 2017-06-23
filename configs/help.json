@@ -9,8 +9,12 @@
       "header": "  Command description",
       "text": [
         "   pack <lib_name>  : pack registered lib in zip",
-        "   mkenv <env_name> : create new enviroment",
-        "   env <env_name>   : set active enviroment from existing",
+        "                   ***",
+        "   mkenv <env_name> : create new environment",
+        "   env <env_name>   : set active environment from existing",
+        "   clenv <env_name> : remove environment",
+        "   lsenv            : print list of existing environments",
+        "                   ***",
         "   uninst           : remove wayli tool",
         "   help             : show tool information"
       ]
