@@ -31,7 +31,7 @@ class PathUtils {
     }
 
     macro static function getSystemPathes() {
-        var className = Type.getClassName(~/windows/i.match(Sys.systemName()) ? WinPathes : UnixPathes);
+        var className = Type.getClassName(~/windows/i.match(Sys.systemName()) ? WinPathes : UnixPathes).split(".").pop();
         return macro ${haxe.macro.Context.parse('new $className()', haxe.macro.Context.currentPos())};
     }
 
