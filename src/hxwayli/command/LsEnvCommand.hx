@@ -11,11 +11,14 @@ class LsEnvCommand implements ICommand {
 
     public function execute():Int {
         var counter = 0;
-        _msg = '\tCurrent env: ${UserStorage.settings.currentEnv} [lib - default haxelib env]';
+        _msg = ' Current environment: ${UserStorage.settings.currentEnv} [lib - default haxelib env]';
 
         for (env in UserStorage.settings.envList) {
+            if (counter % 3 == 0) {
+                _msg += "\n";
+            }
             counter++;
-            _msg += '\n\t  [$counter] : $env';
+            _msg += '  [$counter]: $env';
         }
 
         return 0;
