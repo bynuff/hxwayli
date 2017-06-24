@@ -6,10 +6,10 @@ using StringTools;
 class PathUtils {
 
     inline public static var DEFAULT_ENV_PATH:String = "lib";
-    inline public static var SETTINGS_FILE_PATH:String = "settings.json";
 
     public static var HAXE_PATH(get, never):String;
     public static var STORAGE_PATH(get, never):String;
+    public static var SETTINGS_PATH(get, never):String;
     public static var WAYLI_PROGRAM_PATH(get, never):String;
 
     static var systemPathes:IPathes = getSystemPathes();
@@ -24,6 +24,10 @@ class PathUtils {
 
     public static function deleteDirectory(path:String) {
         systemPathes.deleteDirectory(path);
+    }
+
+    public static function createFile(path:String) {
+        systemPathes.createFile(path);
     }
 
     public static function deleteFile(path:String) {
@@ -41,6 +45,10 @@ class PathUtils {
 
     static function get_STORAGE_PATH():String {
         return joinPathes([HAXE_PATH, "wayli/local"]);
+    }
+
+    static function get_SETTINGS_PATH():String {
+        return joinPathes([STORAGE_PATH, "settings.json"]);
     }
 
     static function get_WAYLI_PROGRAM_PATH():String {
@@ -72,6 +80,10 @@ private class UnixPathes implements IPathes {
 
     public function deleteDirectory(path:String) {
         Sys.command("sudo", ["rm", "-rf", normalize(path)]);
+    }
+
+    public function createFile(path:String) {
+        Sys.command("sudo", ["echo", ">", normalize(path)]);
     }
 
     public function deleteFile(path:String) {
@@ -109,6 +121,10 @@ private class WinPathes implements IPathes {
         Sys.command("rmdir", ["/s", "/q", normalize(path)]);
     }
 
+    public function createFile(path:String) {
+        Sys.command("echo", [">", normalize(path)]);
+    }
+
     public function deleteFile(path:String) {
         Sys.command("del", ["/s", "/f", "/q", normalize(path)]);
     }
@@ -128,6 +144,8 @@ private interface IPathes {
     function createDirectory(path:String):Void;
 
     function deleteDirectory(path:String):Void;
+
+    function createFile(path:String):Void;
 
     function deleteFile(path:String):Void;
 

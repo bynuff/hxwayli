@@ -85,7 +85,8 @@ class UserStorage {
     }
 
     static function flush() {
-        var output = File.write([PathUtils.STORAGE_PATH, PathUtils.SETTINGS_FILE_PATH].joinPathes());
+        PathUtils.SETTINGS_PATH.createFile();
+        var output = File.write(PathUtils.SETTINGS_PATH);
         output.writeString(Json.stringify(_settings == null ? EMPTY_SETTINGS : _settings));
         output.close();
     }
@@ -95,7 +96,7 @@ class UserStorage {
             initStorage();
         }
         if (_settings == null) {
-            var bytes = File.getBytes([PathUtils.STORAGE_PATH, PathUtils.SETTINGS_FILE_PATH].joinPathes());
+            var bytes = File.getBytes(PathUtils.SETTINGS_PATH);
             _settings = Json.parse(bytes.toString());
         }
         return _settings;
