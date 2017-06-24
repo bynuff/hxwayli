@@ -75,7 +75,7 @@ private class UnixPathes implements IPathes {
     }
 
     public function createDirectory(path:String) {
-        Sys.command("mkdir", ["-m", "777", normalize(path)]);
+        Sys.command("sudo", ["mkdir", "-m", "777", normalize(path)]);
     }
 
     public function deleteDirectory(path:String) {
