@@ -85,7 +85,6 @@ class UserStorage {
     }
 
     static function flush() {
-        PathUtils.SETTINGS_PATH.createFile();
         var output = File.write(PathUtils.SETTINGS_PATH);
         output.writeString(Json.stringify(_settings == null ? EMPTY_SETTINGS : _settings));
         output.close();

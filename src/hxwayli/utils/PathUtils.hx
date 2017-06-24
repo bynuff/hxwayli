@@ -44,7 +44,7 @@ class PathUtils {
     }
 
     static function get_STORAGE_PATH():String {
-        return joinPathes([HAXE_PATH, "wayli/local"]);
+        return joinPathes([HAXE_PATH, "wayli"]);
     }
 
     static function get_SETTINGS_PATH():String {
