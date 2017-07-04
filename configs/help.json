@@ -1,5 +1,5 @@
 {
-  "title": " Haxe Develop Library Tool 0.0.1 - (c)2016-2017 bynuff",
+  "title": " Haxelib Developer Tool 0.0.1 - (c)2016-2017 bynuff",
   "body": [
     {
       "header": "  Usage: wayli [command] [options]",
@@ -8,15 +8,15 @@
     {
       "header": "  Command description",
       "text": [
-        "   pack <lib_name>  : pack registered lib in zip",
+        "   pack <project_path> : path to dev lib",
         "                   ***",
-        "   mkenv <env_name> : create new environment",
-        "   env <env_name>   : set active environment from existing",
-        "   clenv <env_name> : remove environment",
-        "   lsenv            : print list of existing environments",
+        "   mkenv <env_name>    : create new environment",
+        "   env <env_name>      : set active environment from existing",
+        "   clenv <env_name>    : remove environment",
+        "   lsenv               : print list of existing environments",
         "                   ***",
-        "   uninst           : remove wayli tool",
-        "   help             : show tool information"
+        "   uninst              : remove wayli tool",
+        "   help                : show tool information"
       ]
     }
   ]

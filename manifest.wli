@@ -1,6 +1,15 @@
 {
   "zip": {
-    "name": "hxwayli_haxelib_0.0.0.1.zip",
-    "include": ["src", "LICENSE", "README.md", "haxelib.json", "run.n", "build.hxml"]
+    "name": "hxwayli_haxelib_0.0.1.zip",
+    "include": [
+      "src",
+      "tool",
+      "configs",
+      "LICENSE",
+      "README.md",
+      "build.hxml",
+      "haxelib.json",
+      "run.n"
+    ]
   }
 }

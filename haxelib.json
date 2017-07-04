@@ -2,11 +2,11 @@
   "name": "hxwayli",
   "url" : "https://github.com/bynuff/hxwayli",
   "license": "MIT",
-  "tags": ["cross", "utility"],
-  "description": "",
-  "version": "0.0.0.1",
+  "tags": ["cross", "utility", "tools", "haxelib"],
+  "description": "Haxelib Developer Tool.",
+  "version": "0.0.1",
   "classPath": "src",
-  "releasenote": "",
+  "releasenote": "Initial release.",
   "contributors": ["bynuff"],
   "dependencies": {}
 }
